@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  
+  skip_before_action :authenticate_user!
 
   def create
     user = User.find_for_authentication(email: params[:email])
@@ -9,4 +11,5 @@ class SessionsController < ApplicationController
       render json: { error: "User or password is invalid" }, status: 422
     end
   end
+  
 end

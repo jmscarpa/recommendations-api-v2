@@ -9,7 +9,7 @@ class RecommendationsController < ApplicationController
   end
 
   def create
-    recommendation = Recommendation.new(recommendations_params)
+    recommendation = current_user.recommendations.new(recommendations_params)
 
     if recommendation.save
       render json: {}, status: 201
@@ -19,7 +19,7 @@ class RecommendationsController < ApplicationController
   end
 
   def update
-    recommendation = Recommendation.find(params[:id])
+    recommendation = current_user.recommendations.find(params[:id])
     recommendation.attributes = recommendations_params
     if recommendation.save
       render json: {}, status: 200
@@ -29,7 +29,7 @@ class RecommendationsController < ApplicationController
   end
 
   def destroy
-    recommendation = Recommendation.find(params[:id])
+    recommendation = current_user.recommendations.find(params[:id])
     if recommendation.destroy
       render json: {}, status: 200
     else

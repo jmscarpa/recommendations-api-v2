@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 
   def create
     recommendation = Recommendation.find(params[:recommendation_id])
-    comment = recommendation.comments.new(content: params[:content])
+    comment = recommendation.comments.new(content: params[:content], user: current_user)
 
     if comment.save
       render json: { }, status: 201

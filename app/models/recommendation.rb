@@ -1,10 +1,12 @@
 class Recommendation < ApplicationRecord
   belongs_to :category, optional: true
+  belongs_to :user, optional: true
   has_many :comments
 
   validates :title, presence: true
   validates :title, uniqueness: true
   validates :category, presence: true
+  validates :user, presence: true
 
   def cover_url
     return self[:cover_url] if self[:cover_url].present?
